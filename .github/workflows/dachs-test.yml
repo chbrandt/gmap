@@ -2,9 +2,9 @@ name: DaCHS Resource Test
 run-name: Test service (on latest dachs)
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   Validate-and-Import:
@@ -17,7 +17,7 @@ jobs:
         run: docker pull gavodachs/dachs:latest
       - name: Run container
         run: |
-          docker run --name dachs_container -v "${{ github.workspace }}:/var/gavo/inputs/planmap" -dt gavodachs/dachs
+          docker run --name dachs_container -v "${{ github.workspace }}:/var/gavo/inputs/gmap" -dt gavodachs/dachs
       - name: Check running container
         run: |
           docker ps | grep -q dachs_container
@@ -26,8 +26,8 @@ jobs:
           docker exec dachs_container /dachs.sh start
       - name: Validate RD
         run: |
-          docker exec dachs_container dachs val planmap/q
+          docker exec dachs_container dachs val gmap/q
       - name: Import RD (sample)
         run: |
-          docker exec dachs_container dachs imp -M 100 planmap/q
+          docker exec dachs_container dachs imp -M 100 gmap/q
         
