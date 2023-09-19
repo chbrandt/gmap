@@ -1,0 +1,33 @@
+name: DaCHS Resource Test
+run-name: Test service (on latest dachs)
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  Validate-and-Import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: List repository content
+        run: du -sh ${{ github.workspace }}/*
+      - name: Pull DaCHS image (latest)
+        run: docker pull gavodachs/dachs:latest
+      - name: Run container
+        run: |
+          docker run --name dachs_container -v "${{ github.workspace }}:/var/gavo/inputs/planmap" -dt gavodachs/dachs
+      - name: Check running container
+        run: |
+          docker ps | grep -q dachs_container
+      - name: Start DaCHS
+        run: |
+          docker exec dachs_container /dachs.sh start
+      - name: Validate RD
+        run: |
+          docker exec dachs_container dachs val planmap/q
+      - name: Import RD (sample)
+        run: |
+          docker exec dachs_container dachs imp -M 100 planmap/q
+        

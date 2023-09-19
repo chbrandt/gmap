@@ -1,0 +1,16 @@
+name: planmap-vespa
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - fiona=1.8.13
+  - jupyterlab=2.2.6
+  - notebook=6.3.0
+  - numpy=1.20.2
+  - pandas=1.1.1
+  - pip=20.2.2
+  - python=3.7
+  - rasterio=1.1.7
+  - requests=2.24.0
+  - scipy=1.6.3
+  - shapely=1.7.1
