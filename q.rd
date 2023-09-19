@@ -12,7 +12,7 @@
     data package --map-- they compose.
   </meta>
   <meta name="creationDate">2023-09-01T01:01:01</meta>
-  <meta name="subject">Geology</meta>
+  <meta name="subject">planetary-geology</meta>
   <meta name="creator.name">Carlos Henrique Brandt</meta>
   <meta name="subjects">geology, maps, planet</meta>
   <meta name="instrument">custom</meta>
@@ -26,14 +26,11 @@
 
   <table id="epn_core" onDisk="true" adql="True" primary="granule_uid">
     <mixin spatial_frame_type="body"
-        <!--
-        optional_columns="access_url access_format access_estsize access_md5 thumbnail_url publisher bib_reference file_name"
-        -->
         optional_columns="access_format access_estsize access_md5 publisher bib_reference file_name"
         >
            //epntap2#table-2_0
     </mixin>
-    <stc> Polygon [s_region] </stc>
+    <stc> Polygon UNKNOWNFrame [s_region] </stc>
     <publish sets="ivo_managed,local"/>
   </table>
 
